@@ -79,6 +79,8 @@ public class Scanner {
             case '/':
                 if (match('/')) {
                     while(peek() != '\n' && !isAtEnd()) advance();
+                } else if (match('*')) {
+                    multiLineComment();
                 } else {
                     addToken(SLASH);
                 }
@@ -142,6 +144,19 @@ public class Scanner {
         }
 
         addToken(NUMBER, Double.parseDouble(source.substring(start, current)));
+    }
+
+    private void multiLineComment() {
+        while (!isAtEnd()) {
+            if (peek() == '\n') {
+                line++;
+            } else if (peek() == '*' && peekNext() == '/') {
+                advance();
+                advance();
+                break;
+            }
+            advance();
+        }
     }
 
     private void string() {
