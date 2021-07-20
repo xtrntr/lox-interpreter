@@ -46,7 +46,8 @@ class Interpreter implements Expr.Visitor<Object>,
 
     @Override
     public Void visitExpressionStmt(Stmt.Expression stmt) {
-        evaluate(stmt.expression);
+        Object value = evaluate(stmt.expression);
+        System.out.println(stringify(value));
         return null;
     }
 
