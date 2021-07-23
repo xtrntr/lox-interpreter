@@ -53,7 +53,7 @@ public class Lox {
     List<Stmt> statements = parser.parse();
 
     if (hadError) return;
-    
+
     interpreter.interpret(statements);
   }
 
@@ -80,4 +80,3 @@ public class Lox {
     hadRuntimeError = true;
   }
 }
-
